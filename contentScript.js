@@ -8,7 +8,7 @@ var sleep = function (ms) {
 var startSolving = async function () {
     await sleep(2000)
     while(true){
-        await sleep(500) // Wait for the page to open properly
+        await sleep(1000) // Wait for the page to open properly
         const question = await parseQuestion()
         await answerQuestion(question)   
     }
@@ -59,19 +59,17 @@ var answerQuestion = async function(question){
         }else{
             if(solution != undefined){
                 alert(solution)
-            }else{
-                alert("Sorry no answers found, please type something in 10 seconds")
             }
             await waitForAnswer(question)
         }
         state = "ANSWERED"
-        await sleep(400)
+        await sleep(1000)
     }
 
     if(state == "ANSWERED"){
         var high = await getSpecificButton("High")
         if(high) high.click()
-        await sleep(500)
+        await sleep(1000)
         await saveAnswer(question)
         await goToNextQuestion()  
     }
@@ -118,7 +116,7 @@ var answerMSQ = function(solution) {
 
 var waitForAnswer = async function() {
     while(getQuestionState() == "PENDING"){
-        await sleep(200)
+        await sleep(600)
     }
 }
 
@@ -141,7 +139,7 @@ var goToNextQuestion = async function() {
 var visitTextBookAndReset = async function(){
     var textbookButton = await getSpecificButton("Read About the Concept")
     textbookButton.click()
-    await sleep(100)
+    await sleep(1000)
     var returnButton = await getSpecificButton("To Questions")
     returnButton.click()
 }
@@ -217,3 +215,5 @@ else if(window.location.href.includes('https://learning.mheducation.com')){
         startSolving()
     })
 }
+
+
