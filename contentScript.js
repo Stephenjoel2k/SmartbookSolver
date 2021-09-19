@@ -8,7 +8,7 @@ var startSolving = async function () {
   await sleep(2000)
   while (true) {
     try {
-      await sleep(1000) // Wait for the page to open properly
+      await sleep(250) // Wait for the page to open properly
       const question = await parseQuestion()
       await answerQuestion(question)
     } catch (e) {
@@ -74,13 +74,13 @@ var answerQuestion = async function (question) {
       await waitForAnswer(question)
     }
     state = 'ANSWERED'
-    await sleep(1000)
+    await sleep(250)
   }
 
   if (state == 'ANSWERED') {
     var high = await getSpecificButton('High')
     if (high) high.click()
-    await sleep(1000)
+    await sleep(250)
     await saveAnswer(question)
     await goToNextQuestion()
   }
@@ -141,7 +141,7 @@ var goToNextQuestion = async function () {
 var visitTextBookAndReset = async function () {
   var textbookButton = await getSpecificButton('Read About the Concept')
   textbookButton.click()
-  await sleep(1000)
+  await sleep(250)
   var returnButton = await getSpecificButton('To Questions')
   returnButton.click()
 }
